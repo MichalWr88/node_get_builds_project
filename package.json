@@ -9,8 +9,7 @@
   },
   "author": "MM",
   "license": "ISC",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "node-fetch": "^2.3.0",
     "node-stream-zip": "^1.8.0",
