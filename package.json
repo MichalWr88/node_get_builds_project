@@ -1,0 +1,25 @@
+{
+  "name": "build_zips-jenkins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "getbuilds": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "node-fetch": "^2.3.0",
+    "node-stream-zip": "^1.8.0",
+    "save-file": "^2.2.1",
+    "yargs": "^13.2.0",
+    "del": "^3.0.0",
+    "handlebars": "^4.1.0",
+    "inquirer": "^6.2.2",
+    "node-zip": "^1.1.1",
+    "zip-local": "^0.3.4"
+  }
+}
