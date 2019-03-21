@@ -8,11 +8,12 @@ const fs = require('fs'),
 	argv = require('yargs').argv,
 	zipper = require("zip-local"),
 	config = require('./config'),
-	comand = [...argv._];
-	
-const setConfig = ()=>{
+	comand = [...argv._],
+	jenkins = require('jenkins')({ baseUrl: config.jenkinsAuthUrl});
+
+const setConfig = () => {
 	const template = handlebars.compile(JSON.stringify(config.buildList));
-	const configBuild = JSON.parse(template({ "iMapClientUrl": config.iMapClientUrl, "artifactUrl": config.artifactUrl }));
+	const configBuild = JSON.parse(template({ "jenkinsUrl": config.jenkinsUrl, "artifactUrl": config.artifactUrl }));
 	return configBuild
 }
 
@@ -27,3 +28,4 @@ module.exports.argv = argv;
 module.exports.comand = comand;
 module.exports.extractedFolder = config.extractedFolder;
 module.exports.configBuild = setConfig();
+module.exports.jenkins = jenkins;

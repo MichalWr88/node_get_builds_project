@@ -1,5 +1,5 @@
 
-const { fs, fetch, StreamZip, zipper, del, inquirer, configBuild, comand, extractedFolder } = require('./config/imports');
+const { fs, fetch, StreamZip, zipper, del, inquirer, configBuild, extractedFolder } = require('./config/imports');
 const g = require('./shared/main');
 
 
@@ -40,7 +40,7 @@ const extractZip = (fileName) => {
 			const zip = new StreamZip({ file: `${fileName}.zip`, storeEntries: true });
 			zip.on('ready', () => {
 				fs.mkdirSync(urlExtracted);
-				zip.extract('archive/build/es6', urlExtracted, err => {
+				zip.extract('archive/build', urlExtracted, err => {
 					if (err) { reject(`Extract error ${fileName}`) }
 					console.log(`Extracted ${fileName}`);
 					zip.close();
@@ -52,19 +52,24 @@ const extractZip = (fileName) => {
 };
 const makeZipBuild = (name) => {
 	return new Promise((resolve, reject) => {
-		zipper.zip(`./${extractedFolder}${name}`, function (error, zipped) {
-			if (!error) {
-				zipped.compress(); // compress before exporting
-				var buff = zipped.memory(); // get the zipped file as a Buffer
-				// or save the zipped file to disk
-				zipped.save(`./${extractedFolder}${name}.zip`, function (error) {
-					if (!error) {
-						resolve(name);
-						console.log("saved successfully !");
-					}
-				});
-			}
-		});
+		fs.rename(`./${extractedFolder}${name}/es6`, `./${extractedFolder}${name}/${name}`, () => {
+			zipper.zip(`./${extractedFolder}${name}`, function (error, zipped) {
+				if (!error) {
+					zipped.compress(); // compress before exporting
+					var buff = zipped.memory(); // get the zipped file as a Buffer
+					// or save the zipped file to disk
+					g.getInfobuild(name).then((infoBuild) => {
+
+						zipped.save(`./${extractedFolder}/${name}-${infoBuild}.zip`, function (error) {
+							if (!error) {
+								resolve(name);
+								console.log("saved successfully !");
+							}
+						});
+					})
+				}
+			});
+		})
 	})
 }
 
@@ -72,16 +77,13 @@ const makeZipBuild = (name) => {
 inquirer
 	.prompt([
 		{
-			type: 'list',
-			name: 'choice',
-			message: 'Wybierz co chesz zrobic',
-			choices: [{name:"zbudj apki na jankinsie"},{name:"pobierz buildy"}],
+			type: 'checkbox',
+			name: 'buildList',
+			message: 'Wybierz które buildy chcesz pobrac',
+			choices: g.getNamesList(configBuild),
 		},
 	])
-	.then(answers => { 
-		console.log(answers);
-		
-	});
+	.then(answers => { answers.buildList.forEach(elem => { downloadBuild(configBuild.find(item => elem == item.comandName)) }) });
 
 
 
