@@ -1,7 +1,7 @@
 
 module.exports = {
-	// "jenkinsAuthUrl": "http://{{login}}:{{password}}@hudsonwroc2.gispartner.pl:8080",
-	"jenkinsAuthUrl": "http://mmaleszewski:Akinom88@hudsonwroc2.gispartner.pl:8080",
+	"jenkinsAuthUrl": "http://{{login}}:{{password}}@hudsonwroc2.gispartner.pl:8080",
+	// "jenkinsAuthUrl": "http://mmaleszewski:Akinom88@hudsonwroc2.gispartner.pl:8080",
 	"jenkinsUrl": "http://hudsonwroc2.gispartner.pl:8080",
 	"artifactUrl": "lastSuccessfulBuild/artifact/*zip*/",
 	"extractedFolder": "builds/",
