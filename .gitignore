@@ -1,4 +1,4 @@
 node_modules/
 extracted/
 *.zip
-config/credental.json
+# config/credental.json

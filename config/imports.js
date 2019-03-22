@@ -5,17 +5,19 @@ const fs = require('fs'),
 	del = require('del'),
 	inquirer = require('inquirer'),
 	handlebars = require('handlebars'),
-	argv = require('yargs').argv,
+	yargs = require('yargs'),
+	chalk = require('chalk'),
 	zipper = require("zip-local"),
 	config = require('./config'),
-	comand = [...argv._],
-	jenkins = require('jenkins')({ baseUrl: config.jenkinsAuthUrl});
+	credential = require('./credential.json'),
+	setConfig = () => {
+		const template = handlebars.compile(JSON.stringify(config));
+		const configBuild = JSON.parse(template({ "jenkinsUrl": config.jenkinsUrl, "artifactUrl": config.artifactUrl, "login": credential.login, "password": credential.password }));
+		return configBuild;
+	},
+	configBuild = setConfig(),
+	jenkins = require('jenkins')({ baseUrl: configBuild.jenkinsAuthUrl });
 
-const setConfig = () => {
-	const template = handlebars.compile(JSON.stringify(config.buildList));
-	const configBuild = JSON.parse(template({ "jenkinsUrl": config.jenkinsUrl, "artifactUrl": config.artifactUrl }));
-	return configBuild
-}
 
 module.exports.fs = fs;
 module.exports.fetch = fetch;
@@ -24,8 +26,8 @@ module.exports.zipper = zipper;
 module.exports.del = del;
 module.exports.inquirer = inquirer;
 module.exports.handlebars = handlebars;
-module.exports.argv = argv;
-module.exports.comand = comand;
+module.exports.yargs = yargs;
 module.exports.extractedFolder = config.extractedFolder;
-module.exports.configBuild = setConfig();
+module.exports.configBuild = configBuild;
 module.exports.jenkins = jenkins;
+module.exports.chalk = chalk;

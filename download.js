@@ -2,7 +2,6 @@
 const { fs, fetch, StreamZip, zipper, del, inquirer, configBuild, extractedFolder } = require('./config/imports');
 const g = require('./shared/main');
 
-
 const getZip = (obj) => {
 	return fetch(`${obj.url}`).then(resp => {
 		return new Promise((resolve, reject) => {
@@ -80,10 +79,10 @@ inquirer
 			type: 'checkbox',
 			name: 'buildList',
 			message: 'Wybierz które buildy chcesz pobrac',
-			choices: g.getNamesList(configBuild),
+			choices: g.getNamesList(configBuild.buildList),
 		},
 	])
-	.then(answers => { answers.buildList.forEach(elem => { downloadBuild(configBuild.find(item => elem == item.comandName)) }) });
+	.then(answers => { answers.buildList.forEach(elem => { downloadBuild(configBuild.buildList.find(item => elem == item.comandName)) }) });
 
 
 
