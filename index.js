@@ -2,21 +2,6 @@
 const { fs, inquirer, yargs } = require('./config/imports');
 const g = require('./shared/main');
 
-// yargs.command({
-// 	command:"add",
-// 	describe:"testpwy opis",
-// 	builder: {
-// 		title: {
-// 			describe: "opis builder",
-// 			demandOption: true,
-// 			type:"string"
-// 		}
-// 	},
-// 	handler: function (argv){
-// 		console.log(chalk.bgBlue("testowy opis"));
-
-// 	}
-// })
 yargs.command({
 	command: "auth",
 	describe: "Ustawienie danych dostepowych do jenkinsa",
