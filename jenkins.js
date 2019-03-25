@@ -1,4 +1,4 @@
-const { fs, jenkins, configBuild, yargs, chalk, inquirer } = require('./config/imports');
+const { jenkins, configBuild, yargs, chalk, inquirer } = require('./config/imports');
 const g = require('./shared/main');
 
 // jenkins.info(function(err, data) {

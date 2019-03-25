@@ -11,9 +11,14 @@ const fs = require('fs'),
 	config = require('./config'),
 	credential = require('./credential.json'),
 	setConfig = () => {
-		const template = handlebars.compile(JSON.stringify(config));
-		const configBuild = JSON.parse(template({ "jenkinsUrl": config.jenkinsUrl, "artifactUrl": config.artifactUrl, "login": credential.login, "password": credential.password }));
-		return configBuild;
+		try {
+			const template = handlebars.compile(JSON.stringify(config));
+			const configBuild = JSON.parse(template({ "jenkinsUrl": config.jenkinsUrl, "artifactUrl": config.artifactUrl, "login": credential.login, "password": credential.password }));
+			return configBuild;
+		} catch (error) {
+			console.log(chalk.red(error));
+
+		}
 	},
 	configBuild = setConfig(),
 	jenkins = require('jenkins')({ baseUrl: configBuild.jenkinsAuthUrl });

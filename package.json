@@ -1,13 +1,13 @@
 {
   "name": "node_get_builds_project",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "start-build":"node jenkins.js run",
-    "start-download":"node download.js"
+    "setBuild":"node jenkins.js run",
+    "getDownload":"node download.js",
+    "auth":"node index.js auth"
   },
   "author": "MM",
   "license": "ISC",
