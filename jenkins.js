@@ -5,13 +5,13 @@ yargs.command({
 	command: "run",
 	describe: "Wystartuj budowanie aplikacji",
 	handler: () => {
-		console.log(chalk.bgBlue("Startowanie budowanie aplikacji"));
+		console.log(chalk.bgBlue("Startowanie budowania aplikacji"));
 		inquirer
 			.prompt([
 				{
 					type: 'checkbox',
 					name: 'buildList',
-					message: 'Wybierz które buildy chcesz pobrac',
+					message: 'Wybierz które apki chcesz zbudowac',
 					choices: g.getNamesList(configBuild.buildList),
 				},
 			])

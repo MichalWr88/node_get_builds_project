@@ -2,7 +2,7 @@
 module.exports = {
 	"jenkinsAuthUrl": "http://{{login}}:{{password}}@hudsonwroc2.gispartner.pl:8080",
 	"jenkinsUrl": "http://hudsonwroc2.gispartner.pl:8080",
-	"credentialPath":"./credential.json",
+	"credentialPath": "./credential.json",
 	"artifactUrl": "lastSuccessfulBuild/artifact/*zip*/",
 	"extractedFolder": "builds/",
 	"buildList": [
@@ -45,6 +45,11 @@ module.exports = {
 			"fileName": "imap-mzs",
 			"comandName": "MZS",
 			"url": `{{jenkinsUrl}}/job/imap-mzs/{{artifactUrl}}imap-mzs.zip`
+		},
+		{
+			"fileName": "gniezno-imap-modules",
+			"comandName": "GNIEZNO_MODULES",
+			"url": `{{jenkinsUrl}}/job/gniezno-imap-modules/{{artifactUrl}}gniezno-imap-modules.zip`
 		},
 	]
 
